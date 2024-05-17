@@ -22,14 +22,13 @@ const App = () => {
   }
 
   const handleSumNumbers = () => {
-
     if(firstNumber === '0'){
         setFirstNumber(String(currentNumber));
         setCurrentNumber('0')
         setOperation('+')
     }else {
-      const sum = Number(firstNumber) + Number(currentNumber);
-      setCurrentNumber(String(sum))
+      const result = Number(firstNumber) + Number(currentNumber);
+      setCurrentNumber(String(result))
       setOperation('')
     }
 
@@ -40,13 +39,37 @@ const App = () => {
     if(firstNumber === '0'){
         setFirstNumber(String(currentNumber));
         setCurrentNumber('0')
-        setOperation('-')
-    }else {
-      const sum = Number(firstNumber) - Number(currentNumber);
-      setCurrentNumber(String(sum))
+        setOperation('/')
+    } else {
+      const result = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(result))
       setOperation('')
     }
 
+  }
+
+  const handleDivisionNumbers = () => {
+    if (firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0')
+      setOperation('/')
+    } else {
+      const result = Number(firstNumber) - Number(currentNumber);
+      setCurrentNumber(String(result))
+      setOperation('')
+    }
+  }
+
+  const handleMultiplicateNumbers = () => {
+    if(firstNumber === '0'){
+        setFirstNumber(String(currentNumber));
+        setCurrentNumber('0')
+        setOperation('*')
+    } else {
+      const result = Number(firstNumber) * Number(currentNumber);
+      setCurrentNumber(String(result))
+      setOperation('')
+    }
   }
 
   const handleEquals = () => {
@@ -59,6 +82,12 @@ const App = () => {
           case '-':
             handleMinusNumbers();
             break;
+          case '/':
+            handleDivisionNumbers();
+            break;
+          case '*':
+            handleMultiplicateNumbers();
+            break;
           default: 
             break;
         }
@@ -66,13 +95,14 @@ const App = () => {
 
   }
 
+
   return (
     <Container>
       <Content>
         <Input value={currentNumber}/>
         <Row>
-          <Button label="x"/>
-          <Button label="/"/>
+          <Button label="x" onClick={handleMultiplicateNumbers}/>
+          <Button label="/" onClick={handleDivisionNumbers}/>
           <Button label="c" onClick={handleOnClear}/>
           <Button label="."/>
         </Row>
